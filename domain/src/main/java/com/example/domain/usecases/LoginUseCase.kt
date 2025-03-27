@@ -1,6 +1,6 @@
 package com.example.domain.usecases
 
-import com.example.aplicacion_ucb_restaurante.domain.repository.LoginRepository
+import com.example.domain.repository.LoginRepository
 
 class LoginUseCase(private val loginRepository: LoginRepository) {
 

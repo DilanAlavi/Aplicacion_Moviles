@@ -1,4 +1,4 @@
-package com.example.aplicacion_ucb_restaurante.ui.screens
+    package com.example.aplicacion_ucb_restaurante.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

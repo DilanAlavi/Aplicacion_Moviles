@@ -3,8 +3,11 @@ package com.example.aplicacion_ucb_restaurante.ui.login
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import com.example.framework.dto.LoginRequestDTO
+import com.example.framework.services.LoginService
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(private val loginService: LoginService = LoginService()) : ViewModel() {
 
     // Estado para el email, contraseña y recordar sesión
     private val _email = mutableStateOf("")
@@ -15,6 +18,10 @@ class LoginViewModel : ViewModel() {
 
     private val _rememberMe = mutableStateOf(false)
     val rememberMe: State<Boolean> = _rememberMe
+
+    // Estado para el mensaje de login
+    private val _loginStatus = mutableStateOf("")
+    val loginStatus: State<String> = _loginStatus
 
     // Funciones para manejar los cambios en los campos
     fun onEmailChanged(newEmail: String) {
@@ -29,19 +36,15 @@ class LoginViewModel : ViewModel() {
         _rememberMe.value = checked
     }
 
-    // Función de login
-    fun onLogin() {
-        // Aquí deberías agregar la lógica para validar el login
-        if (_email.value.isNotEmpty() && _password.value.isNotEmpty()) {
-            // Mostrar los valores de los campos en la terminal
-            println("Email: ${_email.value}")
-            println("Password: ${_password.value}")
+    fun onLogin(navController: NavController) {
+        val request = LoginRequestDTO(email.value, password.value)
+        val response = loginService.login(request)
 
-            // Lógica de autenticación
-        } else {
-            // Manejo de error si los campos están vacíos
-            println("Por favor, complete ambos campos.")
+        _loginStatus.value = response.message
+
+        if (response.success) {
+            // Si el login es exitoso, navega al HomeScreen
+            navController.navigate("home")
         }
     }
-
 }

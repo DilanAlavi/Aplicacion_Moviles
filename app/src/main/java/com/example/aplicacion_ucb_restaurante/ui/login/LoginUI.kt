@@ -18,9 +18,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 
 @Composable
-fun LoginGustoUI(viewModel: LoginViewModel = viewModel()) {
+fun LoginGustoUI(navController: NavController, viewModel: LoginViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val email = viewModel.email.value
     val password = viewModel.password.value
     val rememberMe = viewModel.rememberMe.value
@@ -84,7 +85,7 @@ fun LoginGustoUI(viewModel: LoginViewModel = viewModel()) {
 
         // Botón de Next
         Button(
-            onClick = { viewModel.onLogin() },
+            onClick = { viewModel.onLogin(navController) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),

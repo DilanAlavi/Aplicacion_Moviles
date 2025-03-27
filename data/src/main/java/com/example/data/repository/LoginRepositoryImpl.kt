@@ -1,6 +1,6 @@
 package com.example.data.repository
 
-import com.example.aplicacion_ucb_restaurante.domain.repository.LoginRepository
+import com.example.domain.repository.LoginRepository
 
 class LoginRepositoryImpl : LoginRepository {
     override fun login(email: String, password: String): Boolean {
